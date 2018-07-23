@@ -41,12 +41,59 @@
         <!--Theme Responsive css-->
         <link rel="stylesheet" href="assets/css/responsive.css" />
 
+	<!-- demo: make the fonts nicer etc. -->
+	<link rel="stylesheet" type="text/css" href="/360-player/demo.css" />
+	
+	<!-- soundManager.useFlashBlock: related CSS -->
+	<link rel="stylesheet" type="text/css" href="/360-player/flashblock/flashblock.css" />
+	
+	<!-- required -->
+	<link rel="stylesheet" type="text/css" href="/360-player/360player.css" />
+	<link rel="stylesheet" type="text/css" href="/360-player/360player-visualization.css" />
+	
+	
+	<script type="text/javascript">
+	  
+	  soundManager.setup({
+	  // path to directory containing SM2 SWF
+	  url: '/360-player/swf/'
+	  });
+	  
+	  threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
+	  threeSixtyPlayer.config.showHMSTime = true;
+	  
+	  // enable some spectrum stuffs
+	  
+	  threeSixtyPlayer.config.useWaveformData = true;
+	  threeSixtyPlayer.config.useEQData = true;
+	  
+	  // enable this in SM2 as well, as needed
+	  
+	  if (threeSixtyPlayer.config.useWaveformData) {
+	  soundManager.flash9Options.useWaveformData = true;
+	  }
+	  if (threeSixtyPlayer.config.useEQData) {
+	  soundManager.flash9Options.useEQData = true;
+	  }
+	  if (threeSixtyPlayer.config.usePeakData) {
+	  soundManager.flash9Options.usePeakData = true;
+	  }
+	  
+	  if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
+	  // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
+	  soundManager.preferFlash = true;
+	  }
+	  
+	  // favicon is expensive CPU-wise, but can be enabled.
+	  threeSixtyPlayer.config.useFavIcon = false;
+	  
+	</script>
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
-
-    <body data-spy="scroll" data-target=".navbar-collapse">
-
-
+    
+  <body data-spy="scroll" data-target=".navbar-collapse">
+    
+    
         <!-- Preloader -->
         <div id="loading">
             <div id="loading-center">
@@ -79,6 +126,16 @@
 
         <script src="assets/js/plugins.js"></script>
         <script src="assets/js/main.js"></script>
+	
+	<!-- special IE-only canvas fix -->
+	<!--[if IE]><script type="text/javascript" src="script/excanvas.js"></script><![endif]-->
+	
+	<!-- Apache-licensed animation library -->
+	<script type="text/javascript" src="/360-player/script/berniecode-animator.js"></script>
+	
+	<!-- the core stuff -->
+	<script type="text/javascript" src="/360-player/soundmanager2.js"></script>
+	<script type="text/javascript" src="/360-player/script/360player.js"></script>
 
     </body>
 </html>
